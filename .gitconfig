@@ -1,0 +1,3 @@
+[user]
+	name = Samuel
+	email = samuel_morga@hotmail.com\ngit --version\nsudo apt install -y git\ngit config --global user.email samuel_morga@hotmail.com
