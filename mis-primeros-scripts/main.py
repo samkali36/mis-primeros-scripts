@@ -131,15 +131,28 @@ def registrar_pedido(ped: DatosPedido):
 
 @app.get("/pedidos/lista")
 def ver_pedidos():
-    conn = sqlite3.connect("negocio.db")
-    cur = conn.cursor()
-    cur.execute('''SELECT p.*, c.nombre, c.teleccion FROM pedidos p
-                   JOIN clientes c ON p.cliente_id = c.id ORDER BY fecha DESC''')
-    res = [{"id":r[0],"cliente":r[6],"tel":r[7],"tipo":r[2],"cant":r[3],"total":r[4],"estado":r[5],"fecha":r[6]} for r in cur.fetchall()]
-    conn.close()
-    return {"pedidos":res}
-from fastapi.responses import HTMLResponse
-@app.get("/", response_class=HTMLResponse)
-def pagina_inicio():
-    with open("index.html", "r", encoding="utf-8") as archivo:
-        return archivo.read()
+    try:
+        conn = sqlite3.connect("negocio.db")
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT p.id, c.nombre, c.telefono, p.tipo_gas, p.cantidad, p.total, p.estado, p.fecha
+            FROM pedidos p
+            LEFT JOIN clientes c ON p.cliente_id = c.id
+            ORDER BY p.fecha DESC
+        """)
+        pedidos = []
+        for fila in cur.fetchall():
+            pedidos.append({
+                "id": fila[0],
+                "nombre_cliente": fila[1] if fila[1] else "Sin cliente",
+                "telefono": fila[2] if fila[2] else "Sin teléfono",
+                "tipo_gas": fila[3],
+                "cantidad": fila[4],
+                "total": fila[5],
+                "estado": fila[6],
+                "fecha": fila[7]
+            })
+        conn.close()
+        return {"pedidos": pedidos}
+    except Exception as e:
+        return {"error": str(e)}
