@@ -1,6 +1,6 @@
 import requests
 
-API_URL = "http://localhost:8000"
+API_URL = "https://mi-gas-la-de-pesqueria.onrender.com"
 
 def procesar_pedido(telefono, tipo_gas, cantidad, descuento=0):
     respuesta = requests.post(f"{API_URL}/calcular", json={
