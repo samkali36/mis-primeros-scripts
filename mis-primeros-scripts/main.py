@@ -138,3 +138,8 @@ def ver_pedidos():
     res = [{"id":r[0],"cliente":r[6],"tel":r[7],"tipo":r[2],"cant":r[3],"total":r[4],"estado":r[5],"fecha":r[6]} for r in cur.fetchall()]
     conn.close()
     return {"pedidos":res}
+from fastapi.responses import HTMLResponse
+@app.get("/", response_class=HTMLResponse)
+def pagina_inicio():
+    with open("index.html", "r", encoding="utf-8") as archivo:
+        return archivo.read()
