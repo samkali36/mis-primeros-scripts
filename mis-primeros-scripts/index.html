@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Gas La De Pesquería - Sistema Oficial</title>
+    <style>
+        /* === TUS COLORES AQUÍ === */
+        :root {
+            --color-principal: #2E8B57; /* Verde (puedes cambiarlo por el que uses) */
+            --color-secundario: #FFFFFF; /* Blanco */
+            --color-texto: #333333;
+            --color-boton: #FF8C00; /* Naranja para resaltar */
+            --color-boton-hover: #FF7500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-texto);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cabecera {
+            background-color: var(--color-principal);
+            color: var(--color-secundario);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .boton {
+            display: inline-block;
+            background-color: var(--color-boton);
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background-color: var(--color-boton-hover);
+            transform: scale(1.05);
+        }
+
+        .contenedor {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cabecera">
+            <h1>🔥 Mi Gas La De Pesquería</h1>
+            <p>Sistema de Pedidos y Precios</p>
+        </div>
+
+        <a href="/docs" class="boton">📋 Ver Precios y Operaciones</a>
+        <a href="#" class="boton">📝 Registrar Pedido</a>
+        <a href="#" class="boton">👥 Ver Clientes</a>
+        <a href="#" class="boton">📊 Reportes</a>
+    </div>
+</body>
+</html>
