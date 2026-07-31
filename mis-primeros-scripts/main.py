@@ -68,7 +68,7 @@ class DatosPedido(BaseModel):
     descuento: float = 0.0
 
 # --- ENDPOINTS ---
-@app.get("/")
+@app.get("/estado")
 def raiz():
     return {"empresa":"Mi Gas La De Pesquería","estado":"Activo ✅","fecha":datetime.now().strftime("%d/%m/%Y %H:%M")}
 
