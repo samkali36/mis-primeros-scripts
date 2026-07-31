@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Gas La De Pesquería</title>
+    <style>
+        :root { --color-verde: #2E8B57; --color-naranja: #FF8C00; --color-fondo: #F5F5F5; --color-texto: #333; }
+        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); padding: 20px; }
+        .cabecera { background-color: var(--color-verde); color: white; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+        .contenedor { max-width: 800px; margin: 0 auto; }
+        .boton { display: inline-block; background-color: var(--color-naranja); color: white; padding: 12px 24px; margin: 8px; border-radius: 6px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; font-size: 16px; }
+        .boton:hover { background-color: #FF7F00; transform: scale(1.03); }
+        .seccion { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .campo { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        .mensaje { margin-top: 10px; padding: 10px; border-radius: 4px; display: none; }
+        .exito { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+        .error { background-color: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cabecera">
+            <h1>🔥 Mi Gas La De Pesquería</h1>
+            <p>Sistema de Pedidos - Fácil y Rápido</p>
+        </div>
+
+        <div class="seccion">
+            <h3>👤 Registrar Cliente</h3>
+            <div class="campo"><label>Nombre completo:</label><input type="text" id="nombre_cliente" required></div>
+            <div class="campo"><label>Teléfono:</label><input type="tel" id="telefono_cliente" required></div>
+            <div class="campo"><label>Dirección:</label><input type="text" id="direccion_cliente" required></div>
+            <button class="boton" onclick="guardarCliente()">Guardar Cliente</button>
+            <div id="msg_cliente" class="mensaje"></div>
+        </div>
+
+        <div class="seccion">
+            <h3>📝 Registrar Pedido</h3>
+            <div class="campo"><label>Teléfono del cliente:</label><input type="tel" id="tel_pedido" required></div>
+            <div class="campo"><label>Tipo de gas:</label>
+                <select id="tipo_gas">
+                    <option value="30kg">30 kg</option>
+                    <option value="45kg">45 kg</option>
+                    <option value="Litro">Por litro</option>
+                </select>
+            </div>
+            <div class="campo"><label>Cantidad:</label><input type="number" id="cantidad" min="1" value="1" required></div>
+            <div class="campo"><label>Descuento (%):</label><input type="number" id="descuento" min="0" max="100" value="0"></div>
+            <button class="boton" onclick="guardarPedido()">Guardar Pedido</button>
+            <div id="msg_pedido" class="mensaje"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/pedidos/lista" class="boton">📊 Ver todos los pedidos</a>
+            <a href="/precios" class="boton">📋 Ver precios</a>
+        </div>
+    </div>
+
+    <script>
+        async function guardarCliente() {
+            const datos = {nombre: document.getElementById('nombre_cliente').value, telefono: document.getElementById('telefono_cliente').value, direccion: document.getElementById('direccion_cliente').value};
+            const msg = document.getElementById('msg_cliente'); msg.style.display = 'none';
+            try {
+                const res = await fetch('/clientes/nuevo', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(datos)});
+                const resp = await res.json();
+                msg.textContent = resp.mensaje || '✅ Cliente guardado'; msg.className = 'mensaje exito'; msg.style.display = 'block';
+                document.getElementById('nombre_cliente').value = ''; document.getElementById('direccion_cliente').value = '';
+            } catch (e) { msg.textContent = '❌ Error: ' + e; msg.className = 'mensaje error'; msg.style.display = 'block'; }
+        }
+
+        async function guardarPedido() {
+            const datos = {telefono_cliente: document.getElementById('tel_pedido').value, tipo_gas: document.getElementById('tipo_gas').value, cantidad: parseInt(document.getElementById('cantidad').value), descuento: parseFloat(document.getElementById('descuento').value)};
+            const msg = document.getElementById('msg_pedido'); msg.style.display = 'none';
+            try {
+                const res = await fetch('/pedidos/nuevo', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(datos)});
+                const resp = await res.json();
+                if (res.ok) { msg.textContent = ✅ Pedido guardado! Total: $${resp.total}; msg.className = 'mensaje exito'; document.getElementById('tel_pedido').value = ''; }
+                else { msg.textContent = '❌ ' + (resp.detail || 'Error'); msg.className = 'mensaje error'; }
+                msg.style.display = 'block';
+            } catch (e) { msg.textContent = '❌ Error: ' + e; msg.className = 'mensaje error'; msg.style.display = 'block'; }
+        }
+    </script>
+</body>
+</html>
+Interfaz amigable con formularios
