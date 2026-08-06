@@ -32,3 +32,4 @@ sudo chown -R samuel:samuel "reportes/$FECHA"
 git add "reportes/$FECHA" 2>/dev/null
 git commit -m "auto $FECHA $HORA - $IP con pcap" 2>/dev/null
 git push origin main 2>/dev/null
+whois $1 | head -20 > "$EVIDENCIAS/whois-$HORA.txt"
