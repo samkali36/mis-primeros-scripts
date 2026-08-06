@@ -1,2 +1,4 @@
 cron.log
+*.tmp
 *.swp
+.DS_Store
