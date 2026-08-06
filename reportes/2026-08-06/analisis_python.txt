@@ -1,0 +1,10 @@
+   Paquetes: 0
+   Paquetes: 0
+   Paquetes: 0
+🛡️ SOC Report - Buscando evidencias
+
+ - reportes/captura-icmp-80-80.pcapng : 18044 bytes
+
+ - reportes/2026-08-06/evidencias/captura-09-09.pcapng : 984 bytes
+
+ - reportes/2026-08-06/evidencias/captura-09-02.pcapng : 984 bytes
