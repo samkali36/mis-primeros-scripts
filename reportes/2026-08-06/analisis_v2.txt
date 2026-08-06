@@ -1,0 +1,6 @@
+📦 captura-icmp-80-80.pcapng: 18044 bytes -> Number of packets:   100
+                     Number of packets = 100
+📦 captura-09-09.pcapng: 984 bytes -> Number of packets:   8
+                     Number of packets = 8
+📦 captura-09-02.pcapng: 984 bytes -> Number of packets:   8
+                     Number of packets = 8
