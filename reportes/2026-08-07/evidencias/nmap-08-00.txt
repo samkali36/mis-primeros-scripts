@@ -1,0 +1,12 @@
+# Nmap 7.99 scan initiated Fri Aug  7 08:00:01 2026 as: /usr/lib/nmap/nmap --privileged -F -T4 --open -oN /home/samuel/mis-primeros-scripts/reportes/2026-08-07/evidencias/nmap-08-00.txt 8.8.8.8
+Nmap scan report for dns.google (8.8.8.8)
+Host is up (0.026s latency).
+Not shown: 95 filtered tcp ports (no-response), 1 closed tcp port (reset)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT     STATE SERVICE
+53/tcp   open  domain
+443/tcp  open  https
+2000/tcp open  cisco-sccp
+5060/tcp open  sip
+
+# Nmap done at Fri Aug  7 08:00:03 2026 -- 1 IP address (1 host up) scanned in 1.96 seconds
